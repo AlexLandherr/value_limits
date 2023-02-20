@@ -5,6 +5,8 @@
 #include <type_traits>
 #include <sstream>
 #include <iostream>
+#include <iomanip>
+#include <cfloat>
 
 template <typename T>
 requires std::is_signed_v <T>
@@ -47,7 +49,9 @@ void print(const std::string &name) {
 
 int main() {
     std::cout << "Below is a list of max and min values for all numeric types on this system: " << '\n';
-    std::cout << "From: https://en.cppreference.com/w/cpp/language/types" << '\n';
+    std::cout << "From: " << '\n';
+    std::cout << " - https://en.cppreference.com/w/cpp/language/types" << '\n';
+    std::cout << " - https://en.cppreference.com/w/cpp/types/climits" << '\n';
     std::cout << '\n';
     std::cout << "*********** Integer Ranges ************" << '\n';
     PRINT(short int);
@@ -82,20 +86,19 @@ int main() {
 
     std::cout << "*********** Floating Point Ranges ************" << '\n';
     std::cout << "**** float ****" << '\n';
-    std::cout << "Min (±): " << std::dec << std::numeric_limits<float>::min() << '\n';
-    std::cout << "Max (±): " << std::dec << std::numeric_limits<float>::max() << '\n';
+    std::cout << "Max (±) ≈ " << std::setprecision(FLT_DIG) << FLT_MAX << '\n';
 
     std::cout << '\n';
 
     std::cout << "**** double ****" << '\n';
-    std::cout << "Min (±): " << std::dec << std::numeric_limits<double>::min() << '\n';
-    std::cout << "Max (±): " << std::dec << std::numeric_limits<double>::max() << '\n';
+    std::cout << "Min (±) ≈ " << std::setprecision(DBL_DIG) << DBL_MIN << '\n';
+    std::cout << "Max (±) ≈ " << std::setprecision(DBL_DIG) << DBL_MAX << '\n';
 
     std::cout << '\n';
 
     std::cout << "**** long double ****" << '\n';
-    std::cout << "Min (±): " << std::dec << std::numeric_limits<long double>::min() << '\n';
-    std::cout << "Max (±): " << std::dec << std::numeric_limits<long double>::max() << '\n';
+    std::cout << "Min (±) ≈ " << std::setprecision(LDBL_DIG) << LDBL_MIN << '\n';
+    std::cout << "Max (±) ≈ " << std::setprecision(LDBL_DIG) << LDBL_MAX << '\n';
 
     return 0;
 }
